@@ -1,0 +1,29 @@
+org 0000h
+
+MAIN:
+		MOV 	TMOD,#02h 	; chon Timer 0, che do 2
+		
+HERE:	
+		CPL		P1.6
+		ACALL	DELAY1
+		CPL		P1.6
+		ACALL	DELAY
+		SJMP	HERE		; nap lai TH, TL
+		RET
+DELAY:
+		MOV 	TH0, #0E1h
+		SETB 	TR0
+AGAIN:
+		JNB		TF0, AGAIN
+		CLR 	TF0
+		CLR 	TR0
+		RET
+DELAY1:
+		MOV 	TH0, #041h
+		SETB 	TR0
+AGAIN1:
+		JNB		TF0, AGAIN1
+		CLR 	TF0
+		CLR 	TR0
+		RET
+end

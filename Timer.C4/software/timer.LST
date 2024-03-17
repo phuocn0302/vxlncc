@@ -1,0 +1,63 @@
+A51 MACRO ASSEMBLER  TIMER                                                                03/17/2024 22:35:06 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN timer.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE timer.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+                       2     
+0000                   3     MAIN:
+0000 758902            4                     MOV     TMOD,#02h       ; chon Timer 0, che do 2
+                       5                     
+0003                   6     HERE:   
+0003 B296              7                     CPL             P1.6
+0005 111B              8                     ACALL   DELAY1
+0007 B296              9                     CPL             P1.6
+0009 110E             10                     ACALL   DELAY
+000B 80F6             11                     SJMP    HERE            ; nap lai TH, TL
+000D 22               12                     RET
+000E                  13     DELAY:
+000E 758CE1           14                     MOV     TH0, #0E1h
+0011 D28C             15                     SETB    TR0
+0013                  16     AGAIN:
+0013 308DFD           17                     JNB             TF0, AGAIN
+0016 C28D             18                     CLR     TF0
+0018 C28C             19                     CLR     TR0
+001A 22               20                     RET
+001B                  21     DELAY1:
+001B 758C41           22                     MOV     TH0, #041h
+001E D28C             23                     SETB    TR0
+0020                  24     AGAIN1:
+0020 308DFD           25                     JNB             TF0, AGAIN1
+0023 C28D             26                     CLR     TF0
+0025 C28C             27                     CLR     TR0
+0027 22               28                     RET
+                      29     end
+A51 MACRO ASSEMBLER  TIMER                                                                03/17/2024 22:35:06 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0013H   A   
+AGAIN1 . . . . . .  C ADDR   0020H   A   
+DELAY. . . . . . .  C ADDR   000EH   A   
+DELAY1 . . . . . .  C ADDR   001BH   A   
+HERE . . . . . . .  C ADDR   0003H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
